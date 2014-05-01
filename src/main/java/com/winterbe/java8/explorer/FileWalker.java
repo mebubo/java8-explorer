@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Benjamin Winterberg
@@ -49,12 +50,12 @@ public class FileWalker {
     private List<String> getPaths(String basePath) throws IOException {
         File file = new File(basePath + "/allclasses-frame.html");
         Document document = Jsoup.parse(file, "UTF-8", "");
-        List<String> paths = new ArrayList<>();
-        document
+        return document
                 .body()
                 .select(".indexContainer li a")
-                .forEach((link) -> paths.add(link.attr("href")));
-        return paths;
+                .stream()
+                .map(link -> link.attr("href"))
+                .collect(Collectors.toList());
     }
 
 }
