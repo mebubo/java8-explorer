@@ -1,6 +1,7 @@
 package com.winterbe.java8.explorer;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class Main {
         System.out.println(result.getStatistics());
 
         List<TypeInfo> typeInfos = result.getTypeInfos();
-        typeInfos.sort((t1, t2) -> t1.getPackageName().compareTo(t2.getPackageName()));
+        typeInfos.sort(Comparator.comparing(t -> t.getPackageName()));
 
         System.out.println("creating site");
 
