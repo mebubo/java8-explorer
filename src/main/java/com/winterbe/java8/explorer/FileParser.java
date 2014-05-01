@@ -60,14 +60,8 @@ public class FileParser {
                 .first()
                 .html();
 
-        boolean newType = false;
         Elements elements1 = body.select(".contentContainer .description dd");
-        for (Element dd : elements1) {
-            if (dd.text().equals(JAVA_VERSION)) {
-                newType = true;
-                break;
-            }
-        }
+        boolean newType = elements1.stream().anyMatch(dd -> dd.text().equals(JAVA_VERSION));
 
         TypeInfo typeInfo = new TypeInfo();
         typeInfo.setName(typeName);
